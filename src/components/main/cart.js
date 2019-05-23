@@ -8,7 +8,6 @@ import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
 import Button from '@material-ui/core/Button';
 
-
 class CartComponent extends Component {
 
   state = {
@@ -38,7 +37,7 @@ class CartComponent extends Component {
     const open = orderItem ? true : false;
 
 
-    const orderItems = order.id ?
+    const orderItems = orderItemsReverse.length ?
       orderItemsReverse.map((orderItem, index) => (
         <Grid key={index}
           container
@@ -54,7 +53,7 @@ class CartComponent extends Component {
           <Grid item xs={1} onClick={() => this.editOrderItem(orderItem)}><Icon color="primary"><EditIcon /></Icon></Grid>
           <Grid item xs={1} onClick={() => this.deleteOrderItem(orderItem)}><Icon style={{ color: '#d0021b' }}><CloseIcon /></Icon></Grid>
         </Grid>
-      )) : <p></p>;
+      )) : <img className="cart-image" src={require(`../../assets/EmptyCart.svg`)}/>;
     return (
       <div className="cart-container">
         <Grid

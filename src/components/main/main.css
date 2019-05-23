@@ -105,7 +105,7 @@
 }
 
 .cart-container {
-    /* margin: 20px; */
+    text-align: center;
 }
 
 .cart-title {
@@ -137,4 +137,8 @@
     background: #e7e7e7;
     font-size: 22px;
     height: 40px;
+}
+
+.cart-image {
+    margin: 50px;
 }

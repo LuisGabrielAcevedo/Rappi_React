@@ -2,12 +2,20 @@ import Categories from '../data/categories';
 import Products from '../data/products';
 
 class ProductService {
+    filters = {
+        available: {
+            key: 'available',
+            value: false
+        }
+    }
+
     getCategories() {
         return Categories;
     }
 
     getProducts() {
-        return Products.map(product => {
+        const products = Products;
+        return products.map(product => {
             const price = product.price.split('$')[1].replace(/[,]+/g, '.');
             return {
                 ...product,
@@ -16,9 +24,15 @@ class ProductService {
         });
     }
 
+    setAvailableFilter(available) {
+        this.filters.available.value = available;
+    }
+
     getProductsByCategories() {
-        const products = this.getProducts();
+        let products = this.getProducts();
+        products = products.filter(product => product.available === this.filters.available.value);
         let categories = this.getCategories();
+        console.log(this.filters);
         products.forEach(product => {
             const subLevel = product.sublevel_id;
             categories.forEach(category => {

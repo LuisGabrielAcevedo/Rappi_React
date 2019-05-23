@@ -4,6 +4,7 @@ import './main.css';
 import ProductsComponent from './products';
 import CartComponent from './cart';
 import Grid from '@material-ui/core/Grid';
+import SnackbarComponent from './snackbar/snackbar.component';
 
 class MainComponent extends Component {
   render() {
@@ -21,6 +22,7 @@ class MainComponent extends Component {
             <ProductsComponent/>
           </Grid>
         </Grid>
+        <SnackbarComponent/>
       </div>
     );
   }

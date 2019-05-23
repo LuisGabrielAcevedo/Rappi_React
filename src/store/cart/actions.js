@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-
+import * as snackbarActions from '../snackbar/snackbar.actions'
 export const SELECT_CART_ORDER_ITEM = '[Cart] Select Cart Order Item';
 export const ADD_ORDER_ITEM = '[Cart] Add Order Item';
 export const SET_ORDER = '[Cart] Set Order';
@@ -56,6 +56,7 @@ const addOrderItemAction = (orderItem, action) => {
         })
         currentOrder.total = total.toFixed(2);
         dispatch(setOrderAction(currentOrder));
+        dispatch(snackbarActions.sentMessageAction({action:'success', message: "Product added"}));
         dispatch(selectCartOrderItemAction(null));
     }
 }
@@ -72,6 +73,7 @@ const paidOrder = () => {
     return (dispatch) => {
         localStorage.removeItem('rappi');
         dispatch(setOrderAction({...orderDefault}));
+        dispatch(snackbarActions.sentMessageAction({action:'success', message: "Order paid"}));
     }
 }
 

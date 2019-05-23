@@ -40,6 +40,18 @@ class ProductsComponent extends Component {
         });
     };
 
+    filter = name => event => {
+        this.setState({
+            [name]: event.target.value,
+        });
+        this.setFilters();
+    };
+
+    setFilters() {
+       productService.setAvailableFilter(true);
+       this.loadCategories();
+    }
+
     render() {
         const { categories } = this.state;
         const { loading } = this.state;
@@ -71,7 +83,7 @@ class ProductsComponent extends Component {
                     ></FormControlLabel>
                     <FormControlLabel
                         control={
-                            <Checkbox checked={this.setState.availableFilter} color="primary" onChange={this.handleChange('availableFilter')} value="availableFilter" />
+                            <Checkbox checked={this.setState.availableFilter} color="primary" onChange={this.filter('availableFilter')} value="availableFilter" />
                         }
                         label="Available products"
                     />

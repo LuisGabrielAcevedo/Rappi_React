@@ -10,7 +10,7 @@ class ProductsListComponent extends Component {
         this.props.selectOrderItem({
           order_item_id: null,
           product,
-          order_item_quantity: null
+          order_item_quantity: 0
         });
     }
     sort() {

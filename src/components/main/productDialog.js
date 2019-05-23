@@ -10,7 +10,13 @@ import Button from '@material-ui/core/Button';
 class ProductDialogComponent extends Component {
 
     state = {
-        quantity: this.props.orderItem ? this.props.orderItem.order_item_quantity : null
+        quantity: 0
+    }
+
+    componentDidMount() {
+        if (this.props.orderItem) {
+            this.setState({quantity: this.props.orderItem.order_item_quantity})
+        }
     }
 
     handleChange = name => event => {
@@ -31,11 +37,6 @@ class ProductDialogComponent extends Component {
         }, action)
         this.setState({ quantity: 0 });
     }
-
-    componentWillUpdate(nextProps, nextState) {
-
-    }
-
 
     render() {
         const { open } = this.props;
