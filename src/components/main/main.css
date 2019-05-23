@@ -1,0 +1,140 @@
+.drawerContainer {
+    width: 300px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 18px;
+    color: #3f51b5;
+}
+
+.products-container {
+    padding: 5px;
+}
+
+.level-1 {
+    padding: 0 10px 0 10px;
+}
+
+.level-label {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.level-2 {
+    padding: 5px 0 0 20px;
+}
+
+.level-3 {
+    padding: 5px 0 0 40px;
+}
+
+.level-4 {
+    padding: 5px 0 0 60px;
+}
+
+.product-list-container {
+    padding: 4px;
+    overflow: hidden;
+}
+
+.card {
+    width: 150px;
+    height: 170px;
+    text-align: center;
+    float: left;
+    margin: 5px;
+    border: 1px solid #c8ced3;
+    border-radius: .25rem;
+    box-shadow: 0 10px 6px -6px #777;
+    padding: 2px;
+    position: relative;
+}
+
+.card p {
+    margin: 6px;
+}
+
+.card .available {
+    color: #8bc34a;
+    font-weight: 500;
+}
+
+.card .button {
+    position: absolute;
+    bottom: 0;
+    right: 50px;
+}
+
+.card-title {
+    font-weight: 500;
+    font-size: 18px;
+    color: #3f51b5;
+}
+
+.textField {
+    width: 200px;
+    margin: 10px;
+}
+
+@keyframes gradient {
+    0%{
+        background-position: -400px 0
+    }
+    100%{
+        background-position: 1000px 0
+    }
+}
+
+.loading-card {
+    animation: gradient 2s infinite linear;
+    background: linear-gradient(to right, #ecebec 8%, #f9f9f9 18%, #ecebec 33%);
+    background-size: 800px 100px;
+    width: 150px;
+    height: 170px;
+    float: left;
+    margin: 5px;
+    border-radius: .25rem;
+    padding: 2px;
+    position: relative;
+}
+
+.loading-container {
+    padding: 40px;
+    overflow: hidden;
+}
+
+.cart-container {
+    /* margin: 20px; */
+}
+
+.cart-title {
+    width: 100%;
+    background: #3f51b5;
+    color: white;
+    font-weight: 600;
+    height: 50px;
+}
+
+.cart-content {
+    min-height: 100px;
+    border: 1px solid #3f51b5;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.product-dialog-content {
+    width: 300px;
+    padding: 10px;
+    height: 220px;
+}
+
+.cartbutton {
+    width: 100%;
+}
+
+.total {
+    background: #e7e7e7;
+    font-size: 22px;
+    height: 40px;
+}
