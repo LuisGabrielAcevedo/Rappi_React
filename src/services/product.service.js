@@ -103,9 +103,8 @@ class ProductService {
 
                 })
             })
-
         })
-        return categories;
+        return !products.length ?  [] : categories;
     }
 }
 

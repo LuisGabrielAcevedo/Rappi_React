@@ -6,16 +6,18 @@ import Dialog from '@material-ui/core/Dialog';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class ProductDialogComponent extends Component {
 
     state = {
-        quantity: 0
+        quantity: 0,
+        loading: false
     }
 
     componentDidMount() {
         if (this.props.orderItem) {
-            this.setState({quantity: this.props.orderItem.order_item_quantity})
+            this.setState({ quantity: this.props.orderItem.order_item_quantity })
         }
     }
 
@@ -30,17 +32,21 @@ class ProductDialogComponent extends Component {
     };
 
     addOrderItem() {
+        this.setState({ loading: true });
         const action = this.props.orderItem.order_item_id ? 'EDIT' : 'ADD';
-        this.props.addOrderItem({
-            ...this.props.orderItem,
-            order_item_quantity: Number(this.state.quantity)
-        }, action)
-        this.setState({ quantity: 0 });
+        setTimeout(() => {
+            this.setState({ quantity: 0, loading: false });
+            this.props.addOrderItem({
+                ...this.props.orderItem,
+                order_item_quantity: Number(this.state.quantity)
+            }, action)
+        }, 500);
     }
 
     render() {
         const { open } = this.props;
         const { orderItem } = this.props;
+        const loading = this.state.loading ? <CircularProgress size={25}/> : <span>{orderItem.order_item_id ? 'edit item' : 'add item'}</span>;
         return (
             <div>
                 {
@@ -49,7 +55,7 @@ class ProductDialogComponent extends Component {
                             <Grid
                                 container
                                 direction="column"
-                                justify="center"
+                                justify="flex-start"
                                 alignItems="center"
                                 className="product-dialog-content"
                             >
@@ -58,14 +64,19 @@ class ProductDialogComponent extends Component {
                                     id="outlined-name"
                                     label="Quantity"
                                     type="number"
-                                    className=""
+                                    style={{ marginBottom: '60px' }}
                                     value={this.state.quantity}
                                     onChange={this.handleChange('quantity')}
                                     margin="normal"
                                     variant="outlined"
                                 />
-                                <Button style={{ width: '100%' }} variant="contained" onClick={() => this.addOrderItem()} size="large" color="primary">
-                                    {orderItem.order_item_id ? 'edit item' : 'add item'}
+                                <Button
+                                    disabled={!this.state.quantity || this.state.quantity === '0'}
+                                    style={{ width: '100%' }} variant="contained" onClick={() => this.addOrderItem()}
+                                    size="large"
+                                    color="primary"
+                                >
+                                    {loading}
                                 </Button>
                             </Grid>
                         </Dialog> : null

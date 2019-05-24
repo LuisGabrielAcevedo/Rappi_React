@@ -47,9 +47,9 @@ class CartComponent extends Component {
           alignItems="center"
           style={{ width: '100%' }}
         >
-          <Grid item xs>{orderItem.order_item_quantity}</Grid>
+          <Grid item xs={1}>{orderItem.order_item_quantity}</Grid>
           <Grid item xs={5}>{orderItem.product.name}</Grid>
-          <Grid item xs>{`$${(orderItem.product.price * orderItem.order_item_quantity).toFixed(2)}`}</Grid>
+          <Grid item xs={4}>{`$${(orderItem.product.price * orderItem.order_item_quantity).toFixed(2)}`}</Grid>
           <Grid item xs={1} onClick={() => this.editOrderItem(orderItem)}><Icon color="primary"><EditIcon /></Icon></Grid>
           <Grid item xs={1} onClick={() => this.deleteOrderItem(orderItem)}><Icon style={{ color: '#d0021b' }}><CloseIcon /></Icon></Grid>
         </Grid>

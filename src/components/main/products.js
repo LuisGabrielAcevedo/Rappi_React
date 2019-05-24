@@ -49,11 +49,13 @@ class ProductsComponent extends Component {
         const { loading } = this.state;
         return (
             <div className="products-container">
-
+                <h2 className="title">Products</h2>
                 <FormControl style={{ margin: '15px' }}>
                     <Grid
                         container
                         direction="row"
+                        justify="center"
+                        alignItems="center"
                     >
                         <Grid item xs>
                             <FormControlLabel control={
@@ -97,6 +99,8 @@ class ProductsComponent extends Component {
                     <Grid
                         container
                         direction="row"
+                        justify="center"
+                        alignItems="center"
                     >
                         <Grid item xs >
                             <FormControlLabel control={
@@ -165,7 +169,14 @@ class ProductsComponent extends Component {
 
                 </FormControl>
                 {
-                    loading ? <LoadingProductsComponent /> : <CatogoriesListComponent categories={categories} sortBy={this.state.sortBy} loading={this.state.loading} />
+                    loading
+                        ? <LoadingProductsComponent />
+                        : categories.length
+                            ? <CatogoriesListComponent
+                                categories={categories}
+                                sortBy={this.state.sortBy}
+                                loading={this.state.loading} />
+                            : 'No products available'
                 }
             </div>
         );
