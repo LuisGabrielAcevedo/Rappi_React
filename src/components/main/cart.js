@@ -53,7 +53,7 @@ class CartComponent extends Component {
           <Grid item xs={1} onClick={() => this.editOrderItem(orderItem)}><Icon color="primary"><EditIcon /></Icon></Grid>
           <Grid item xs={1} onClick={() => this.deleteOrderItem(orderItem)}><Icon style={{ color: '#d0021b' }}><CloseIcon /></Icon></Grid>
         </Grid>
-      )) : <img className="cart-image" src={require(`../../assets/EmptyCart.svg`)}/>;
+      )) : <img className="cart-image" src={require(`../../assets/EmptyCart.svg`)} alt={require(`../../assets/EmptyCart.svg`)}/>;
     return (
       <div className="cart-container">
         <Grid
