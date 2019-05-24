@@ -19,28 +19,38 @@ class OrdersComponent extends Component {
   render() {
     const orders = this.props.cart.orders;
     return (
-      <div style={{width:'100%'}}>
+      <div>
         <h2 className="title">Orders</h2>
-        <Paper style={{ margin: window.innerWidth > 600 ? '50px' : '0px' }}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Id</TableCell>
-                <TableCell>User</TableCell>
-                <TableCell>Status</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {orders.map(order => (
-                <TableRow key={order.id}>
-                  <TableCell>{order.id}</TableCell>
-                  <TableCell>Carlos</TableCell>
-                  <TableCell>{order.status}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Paper>
+        <Grid
+          style={{ width: '100%' }}
+          container
+          direction="column"
+          justify="center"
+          alignItems="stretch"
+        >
+          <Grid item xs>
+            <Paper style={{ margin: window.innerWidth > 600 ? '50px' : '0px' }}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Id</TableCell>
+                    <TableCell>User</TableCell>
+                    <TableCell>Status</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {orders.map(order => (
+                    <TableRow key={order.id}>
+                      <TableCell>{order.id}</TableCell>
+                      <TableCell>Carlos</TableCell>
+                      <TableCell>{order.status}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Paper>
+          </Grid>
+        </Grid>
         {
           !orders.length
             ?
@@ -50,7 +60,7 @@ class OrdersComponent extends Component {
               justify="center"
               alignItems="center"
             >
-              <Grid>
+              <Grid item xs>
                 <Button variant="contained"
                   size="large" color="primary" onClick={() => { this.goTo('/pos') }}>
                   start a sale

@@ -176,7 +176,7 @@ class ProductsComponent extends Component {
                                 categories={categories}
                                 sortBy={this.state.sortBy}
                                 loading={this.state.loading} />
-                            : 'No products available'
+                            : <p>No products available</p>
                 }
             </div>
         );
