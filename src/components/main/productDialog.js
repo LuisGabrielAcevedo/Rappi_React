@@ -39,7 +39,6 @@ class ProductDialogComponent extends Component {
                 ...this.props.orderItem,
                 order_item_quantity: Number(this.state.quantity)
             }, action)
-            this.setState({ quantity: 0, loading: false });
         }, 500);
         
     }
