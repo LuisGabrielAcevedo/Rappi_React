@@ -43,8 +43,8 @@ class CartComponent extends Component {
           container
           direction="row"
           justify="space-around"
-          spacing={24}
           alignItems="center"
+          spacing={24}
           style={{ width: '100%' }}
         >
           <Grid item xs={1}>{orderItem.order_item_quantity}</Grid>
