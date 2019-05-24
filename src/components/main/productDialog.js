@@ -35,12 +35,13 @@ class ProductDialogComponent extends Component {
         this.setState({ loading: true });
         const action = this.props.orderItem.order_item_id ? 'EDIT' : 'ADD';
         setTimeout(() => {
-            this.setState({ quantity: 0, loading: false });
             this.props.addOrderItem({
                 ...this.props.orderItem,
                 order_item_quantity: Number(this.state.quantity)
             }, action)
+            this.setState({ quantity: 0, loading: false });
         }, 500);
+        
     }
 
     render() {
