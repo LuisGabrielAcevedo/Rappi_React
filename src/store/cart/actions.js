@@ -3,13 +3,14 @@ import * as snackbarActions from '../snackbar/snackbar.actions'
 export const SELECT_CART_ORDER_ITEM = '[Cart] Select Cart Order Item';
 export const ADD_ORDER_ITEM = '[Cart] Add Order Item';
 export const SET_ORDER = '[Cart] Set Order';
+export const SET_ORDERS = '[Cart] Set Orders';
 export const SET_LOADING = '[Cart] Set Loading';
 
 
 const orderDefault = {
     orderItems: [],
     id: moment().unix(),
-    status: 'PENDING',
+    status: 'NEW',
     total: null
 }
 
@@ -24,6 +25,13 @@ const setOrderAction = (order) => {
     return {
         type: SET_ORDER,
         payload: order
+    };
+}
+
+const setOrdersAction = (orders) => {
+    return {
+        type: SET_ORDERS,
+        payload: orders
     };
 }
 
@@ -57,7 +65,9 @@ const addOrderItemAction = (orderItem, action) => {
             total += (item.order_item_quantity * item.product.price);
         })
         currentOrder.total = total.toFixed(2);
+        currentOrder.status = 'PENDING';
         dispatch(setOrderAction(currentOrder));
+        dispatch(saveOrder(currentOrder));
         dispatch(selectCartOrderItemAction(null));
     }
 }
@@ -68,15 +78,35 @@ const deleteOrderItemAction = (orderItem) => {
         order.orderItems = order.orderItems.filter(orderItemItem => orderItemItem.order_item_id !== orderItem.order_item_id)
         dispatch(snackbarActions.sentMessageAction({action:'success', message: "Product deleted"}));
         dispatch(setOrderAction(order));
+        dispatch(saveOrder(order));
     }
 }
 
 const paidOrder = () => {
     return (dispatch) => {
+        const order = JSON.parse(localStorage.getItem('rappi'));
+        order.status = 'PAID';
+        dispatch(saveOrder(order));
         localStorage.removeItem('rappi');
         dispatch(setOrderAction({...orderDefault}));
         dispatch(snackbarActions.sentMessageAction({action:'success', message: "Order paid"}));
     }
+}
+
+const saveOrder = (currentOrder) => {
+    return (dispatch) => {
+        const order = JSON.parse(JSON.stringify(currentOrder));
+        let orders = JSON.parse(localStorage.getItem('rappi_orders'));
+        if (orders) {
+            const orderExist = orders.find(order => order.id === currentOrder.id);
+            orders = orderExist ? orders.map(order => order.id === currentOrder.id ? currentOrder : order)
+            : [...orders, currentOrder];
+            dispatch(setOrdersAction(orders));
+        } else {
+            dispatch(setOrdersAction([order]));
+        }
+    }
+    
 }
 
 export {

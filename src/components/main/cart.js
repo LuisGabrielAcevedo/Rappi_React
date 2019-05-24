@@ -75,10 +75,12 @@ class CartComponent extends Component {
               </Grid> : null
           }
         </div>
-        <Button variant="contained" className="cartbutton"
+        {
+          order && order.status === 'PENDING' ? <Button variant="contained" className="cartbutton"
           size="large" color="primary" onClick={() => this.payOrder()}>
           pay
-        </Button>
+        </Button>: null
+        }
         {
           orderItem ? <ProductDialogComponent open={open} onClose={this.handleClose} orderItem={orderItem}/> : null
         }

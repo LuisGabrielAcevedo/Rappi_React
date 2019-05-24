@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AppBarComponent from './toolbar'
 import './main.css';
 import ProductsComponent from './products';
 import CartComponent from './cart';
@@ -10,7 +9,6 @@ class MainComponent extends Component {
   render() {
     return (
       <div>
-        <AppBarComponent />
         <Grid
           container
           direction="row"
