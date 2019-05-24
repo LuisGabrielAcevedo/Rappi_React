@@ -6,7 +6,7 @@ export const SET_ORDER = '[Cart] Set Order';
 export const SET_LOADING = '[Cart] Set Loading';
 
 
-const { ...orderDefault } = {
+const orderDefault = {
     orderItems: [],
     id: moment().unix(),
     status: 'PENDING',
