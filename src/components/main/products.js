@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import LoadingProductsComponent from './loadingProducts';
+import Button from '@material-ui/core/Button';
 import { sortData, availableData, priceData, quantityData } from '../../data/filters';
 import Grid from '@material-ui/core/Grid';
 
@@ -12,9 +13,9 @@ class ProductsComponent extends Component {
 
     state = {
         loading: true,
-        search: '',
         categories: [],
         sortBy: 'price',
+        search: '',
         available: 'all_products',
         quantity: 'any',
         price: 'any',
@@ -22,6 +23,18 @@ class ProductsComponent extends Component {
         availableOptions: availableData,
         quantityOptions: quantityData,
         priceOptions: priceData
+    }
+
+    clear(){
+        this.setState({
+            search: '',
+            available: 'all_products',
+            quantity: 'any',
+            price: 'any',
+            sortBy: 'price'
+        })
+        productService.clearFilters();
+        this.loadCategories();
     }
 
     componentDidMount() {
@@ -50,12 +63,13 @@ class ProductsComponent extends Component {
         return (
             <div className="products-container">
                 <h2 className="title">Products</h2>
-                <FormControl style={{ margin: '15px' }}>
+                <FormControl className="filters-container">
                     <Grid
                         container
                         direction="row"
-                        justify="center"
+                        justify="flex-start"
                         alignItems="center"
+                        style={{ width: '100%', paddingLeft: '30px' }}
                     >
                         <Grid item xs>
                             <FormControlLabel control={
@@ -72,37 +86,7 @@ class ProductsComponent extends Component {
                             }
                             ></FormControlLabel>
                         </Grid>
-                        <Grid item xs>
-                            <FormControlLabel control={
-                                <TextField
-                                    select
-                                    label="Sort by"
-                                    className="textField"
-                                    value={this.state.sortBy}
-                                    onChange={this.sorBy('sortBy')}
-                                    SelectProps={{ native: true }}
-                                    margin="normal"
-                                    variant="outlined"
-                                >
-                                    {this.state.sortOptions.map(option => (
-                                        <option key={option.key} value={option.value}>
-                                            {option.key}
-                                        </option>
-                                    ))}
-                                </TextField>
-                            }
-                            ></FormControlLabel>
-                        </Grid>
-                        <Grid item xs></Grid>
-                    </Grid>
-
-                    <Grid
-                        container
-                        direction="row"
-                        justify="center"
-                        alignItems="center"
-                    >
-                        <Grid item xs >
+                        <Grid item xs={4} >
                             <FormControlLabel control={
                                 <TextField
                                     select
@@ -144,6 +128,15 @@ class ProductsComponent extends Component {
                             }
                             ></FormControlLabel>
                         </Grid>
+                    </Grid>
+
+                    <Grid
+                        container
+                        direction="row"
+                        justify="flex-start"
+                        alignItems="center"
+                        style={{ width: '100%', paddingLeft: '30px' }}
+                    >
                         <Grid item xs>
                             <FormControlLabel control={
                                 <TextField
@@ -164,6 +157,32 @@ class ProductsComponent extends Component {
                                 </TextField>
                             }
                             ></FormControlLabel>
+                        </Grid>
+                        <Grid item xs>
+                            <FormControlLabel control={
+                                <TextField
+                                    select
+                                    label="Sort by"
+                                    className="textField"
+                                    value={this.state.sortBy}
+                                    onChange={this.sorBy('sortBy')}
+                                    SelectProps={{ native: true }}
+                                    margin="normal"
+                                    variant="outlined"
+                                >
+                                    {this.state.sortOptions.map(option => (
+                                        <option key={option.key} value={option.value}>
+                                            {option.key}
+                                        </option>
+                                    ))}
+                                </TextField>
+                            }
+                            ></FormControlLabel>
+                        </Grid>
+                        <Grid item xs>
+                            <Button variant="contained" onClick={() => this.clear()}>
+                                Clear filters
+                            </Button>
                         </Grid>
                     </Grid>
 

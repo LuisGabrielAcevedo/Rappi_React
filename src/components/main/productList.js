@@ -31,10 +31,10 @@ class ProductsListComponent extends Component {
                     products.map((product, i) => (
                         <div className="card" key={i}>
                             <p className="card-title">{product.name}</p>
-                            <p><span>Price:</span>${product.price}</p>
-                            <p><span>Quantity:</span>{product.quantity}</p>
+                            <p><span>Price:</span><span className="card-text">${product.price}</span></p>
+                            <p><span>Quantity:</span><span className="card-text">{product.quantity}</span></p>
                             {product.available ? <p className="available">available</p> : null}
-                            <IconButton className="button" onClick={() => this.selectOrderItem(product)}>
+                            <IconButton className="button" color="primary" onClick={() => this.selectOrderItem(product)}>
                                 <AddCircleOutlineIcon />
                             </IconButton>
                         </div>

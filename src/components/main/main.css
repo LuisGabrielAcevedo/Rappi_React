@@ -37,7 +37,7 @@
 .level-sub {
     margin-left: 10px;
     font-size: 14px;
-    color: #c8ced3;
+    color: rgb(63,81,181, 0.6);
     font-weight: bold;
 }
 
@@ -57,6 +57,7 @@
     box-shadow: 0 10px 6px -6px #777;
     padding: 2px;
     position: relative;
+    background: white;
 }
 
 .card p {
@@ -80,10 +81,8 @@
     color: #3f51b5;
 }
 
-.textField {
+.textField{
     width: 200px;
-    margin: 10px;
-    text-align: center;
 }
 
 @keyframes gradient {
@@ -128,26 +127,54 @@
 .cart-content {
     min-height: 100px;
     border: 1px solid #3f51b5;
-    padding: 5px;
+    padding: 10px 5px 20px 5px;
     margin-bottom: 20px;
+    background: white;
 }
 
 .product-dialog-content {
     width: 300px;
     padding: 10px;
-    height: 300px;
+    height: 250px;
 }
 
 .cartbutton {
     width: 100%;
 }
 
+.quantity {
+    color: #3f51b5;
+    font-weight: 600;
+}
+
 .total {
     background: #e7e7e7;
+    margin-top: 20px;
     font-size: 22px;
     height: 40px;
+    padding: 0 10px;
 }
 
 .cart-image {
     margin: 50px;
+}
+
+.cart-order-item {
+    width: 100%;
+    height: 50px;
+    padding: 0 10px;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.card-text {
+    font-size: 12px;
+    margin-left: 5px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.filters-container{
+    background: white;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 3px 1px -2px rgba(0,0,0,0.12);
 }

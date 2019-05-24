@@ -64,7 +64,7 @@ class ProductDialogComponent extends Component {
                                     id="outlined-name"
                                     label="Quantity"
                                     type="number"
-                                    style={{ marginBottom: '60px' }}
+                                    style={{ marginBottom: '30px' }}
                                     value={this.state.quantity}
                                     onChange={this.handleChange('quantity')}
                                     margin="normal"

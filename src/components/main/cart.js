@@ -44,12 +44,11 @@ class CartComponent extends Component {
           direction="row"
           justify="space-around"
           alignItems="center"
-          spacing={24}
-          style={{ width: '100%' }}
+          className="cart-order-item"
         >
-          <Grid item xs={1}>{orderItem.order_item_quantity}</Grid>
-          <Grid item xs={5}>{orderItem.product.name}</Grid>
-          <Grid item xs={4}>{`$${(orderItem.product.price * orderItem.order_item_quantity).toFixed(2)}`}</Grid>
+          <Grid item xs={1} className="quantity">{orderItem.order_item_quantity}</Grid>
+          <Grid item xs={4}>{orderItem.product.name}</Grid>
+          <Grid item xs={3}>{`$${(orderItem.product.price * orderItem.order_item_quantity).toFixed(2)}`}</Grid>
           <Grid item xs={1} onClick={() => this.editOrderItem(orderItem)}><Icon color="primary"><EditIcon /></Icon></Grid>
           <Grid item xs={1} onClick={() => this.deleteOrderItem(orderItem)}><Icon style={{ color: '#d0021b' }}><CloseIcon /></Icon></Grid>
         </Grid>
@@ -70,8 +69,9 @@ class CartComponent extends Component {
           {orderItems}
           {
             orderItems && orderItems.length ?
-              <Grid container direction="row" alignItems="center" justify="center" className="total">
-                <Grid item className="posSettingsLeft">Total: {order.total}</Grid>
+              <Grid container direction="row" alignItems="center" justify="space-between" className="total">
+                <Grid item>Total:</Grid>
+                <Grid item>${order.total}</Grid>
               </Grid> : null
           }
         </div>

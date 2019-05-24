@@ -4,7 +4,7 @@ import ProductsListComponent from './productList';
 class CatogoriesListComponent extends Component {
   render() {
     return (
-      <div>
+      <div style={{marginTop: '30px'}}>
         {
           this.props.categories.map((category, i) => (
             <div key={i} className="level-1">
@@ -22,7 +22,7 @@ class CatogoriesListComponent extends Component {
                           <span className="level-sub">({secondLevel.products ? secondLevel.products.length : '0'})</span>
                           {secondLevel.products ? <ProductsListComponent sortBy={this.props.sortBy} products={secondLevel.products} /> : null}
                           {
-                            secondLevel.sublevels ? firstLevel.sublevels.map((lastLevel, z) => (
+                            secondLevel.sublevels ? secondLevel.sublevels.map((lastLevel, z) => (
                               <div className="level-4" key={z}>
                                 <span className="level-label">{lastLevel.name}</span>
                                 <span className="level-sub">({lastLevel.products ? lastLevel.products.length : '0'})</span>

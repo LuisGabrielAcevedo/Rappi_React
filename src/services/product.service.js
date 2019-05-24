@@ -30,8 +30,18 @@ class ProductService {
         this.filters[key] = value;
     }
 
+    clearFilters(){
+        this.filters = {
+            available: 'all_products',
+            quantity: 'any',
+            price: 'any',
+            search: ''
+        }
+    }
+
     getProductsByCategories() {
         let products = this.getProducts();
+
         // Available filter
         products = this.filters.available === 'available'
             ? products.filter(product => product.available)
@@ -93,7 +103,7 @@ class ProductService {
                                                 lastLevel.products
                                                     ? lastLevel.products.push(product)
                                                     : lastLevel.products = [product];
-                                            }
+                                            } 
                                         })
                                     }
                                 }
