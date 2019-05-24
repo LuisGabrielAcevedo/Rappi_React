@@ -19,9 +19,9 @@ class OrdersComponent extends Component {
   render() {
     const orders = this.props.cart.orders;
     return (
-      <div>
+      <div style={{width:'100%'}}>
         <h2 className="title">Orders</h2>
-        <Paper style={{ margin: '50px' }}>
+        <Paper style={{ margin: window.innerWidth > 600 ? '50px' : '0px' }}>
           <Table>
             <TableHead>
               <TableRow>
