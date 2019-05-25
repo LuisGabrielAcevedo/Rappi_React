@@ -55,7 +55,7 @@ class ProductService {
             to_0_100: (prod) => prod.filter(prodItem => prodItem.quantity <= 100),
             to_100_200: (prod) => prod.filter(prodItem => prodItem.quantity > 100 && prodItem.quantity <= 200),
             to_200_500: (prod) => prod.filter(prodItem => prodItem.quantity > 200 && prodItem.quantity <= 500),
-            to_500_1000: (prod) => prod.filter(prodItem => prodItem.quantity > 500 && prodItem.quantity <= 100),
+            to_500_1000: (prod) => prod.filter(prodItem => prodItem.quantity > 500 && prodItem.quantity <= 1000),
             to_1000_0: (prod) => prod.filter(prodItem => prodItem.quantity > 100)
         }
 

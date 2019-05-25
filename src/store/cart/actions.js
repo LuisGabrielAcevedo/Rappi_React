@@ -86,7 +86,7 @@ const addCustomerToOrder = (customer) => {
     return (dispatch) => {
         const order = JSON.parse(localStorage.getItem('rappi'));
         order.customer = customer;
-        dispatch(snackbarActions.sentMessageAction({ action: 'success', message: "customer added" }));
+        dispatch(snackbarActions.sentMessageAction({ action: 'success', message: "Customer added" }));
         dispatch(setOrderAction(order));
         dispatch(saveOrder(order));
     }

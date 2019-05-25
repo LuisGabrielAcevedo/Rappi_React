@@ -38,15 +38,15 @@ export const priceData = [
         value: 'to_0_5'
     },
     {
-        key: 'Between $5 and $10',
+        key: 'Between $5.000 and $10.000',
         value: 'to_5_10'
     },
     {
-        key: 'Between $10 and $20',
+        key: 'Between $10.000 and $20.000',
         value: 'to_10_20'
     },
     {
-        key: 'More $20',
+        key: 'More $20.000',
         value: 'to_20_0'
     }
 ]
