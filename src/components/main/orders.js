@@ -34,7 +34,7 @@ class OrdersComponent extends Component {
                 <TableHead>
                   <TableRow>
                     <TableCell>Id</TableCell>
-                    <TableCell>User</TableCell>
+                    <TableCell>Client</TableCell>
                     <TableCell>Status</TableCell>
                   </TableRow>
                 </TableHead>
@@ -42,7 +42,8 @@ class OrdersComponent extends Component {
                   {orders.map(order => (
                     <TableRow key={order.id}>
                       <TableCell>{order.id}</TableCell>
-                      <TableCell>Carlos</TableCell>
+                      <TableCell>{order.customer 
+                        ? <span style={{color: '#3f51b5'}}>{order.customer.firstName} {order.customer.lastName}</span>: 'Without customer'}</TableCell>
                       <TableCell>{order.status}</TableCell>
                     </TableRow>
                   ))}

@@ -6,11 +6,11 @@ export const SET_ORDER = '[Cart] Set Order';
 export const SET_ORDERS = '[Cart] Set Orders';
 export const SET_LOADING = '[Cart] Set Loading';
 
-
 const orderDefault = {
     orderItems: [],
     id: moment().unix(),
     status: 'NEW',
+    customer: null,
     total: null
 }
 
@@ -46,7 +46,7 @@ const addOrderItemAction = (orderItem, action) => {
                     ? { ...orderItemItem, order_item_quantity: orderItem.order_item_quantity }
                     : orderItemItem;
             })
-            dispatch(snackbarActions.sentMessageAction({action:'success', message: "Product edited"}));
+            dispatch(snackbarActions.sentMessageAction({ action: 'success', message: "Product edited" }));
         } else {
             if (orderItemExist) {
                 currentOrder.orderItems = currentOrder.orderItems.map(orderItemItem => {
@@ -58,7 +58,7 @@ const addOrderItemAction = (orderItem, action) => {
                 orderItem.order_item_id = moment().unix();
                 currentOrder.orderItems.push(orderItem);
             }
-            dispatch(snackbarActions.sentMessageAction({action:'success', message: "Product added"}));
+            dispatch(snackbarActions.sentMessageAction({ action: 'success', message: "Product added" }));
         }
         let total = 0;
         currentOrder.orderItems.forEach(item => {
@@ -76,7 +76,17 @@ const deleteOrderItemAction = (orderItem) => {
     return (dispatch) => {
         const order = JSON.parse(localStorage.getItem('rappi'));
         order.orderItems = order.orderItems.filter(orderItemItem => orderItemItem.order_item_id !== orderItem.order_item_id)
-        dispatch(snackbarActions.sentMessageAction({action:'success', message: "Product deleted"}));
+        dispatch(snackbarActions.sentMessageAction({ action: 'success', message: "Product deleted" }));
+        dispatch(setOrderAction(order));
+        dispatch(saveOrder(order));
+    }
+}
+
+const addCustomerToOrder = (customer) => {
+    return (dispatch) => {
+        const order = JSON.parse(localStorage.getItem('rappi'));
+        order.customer = customer;
+        dispatch(snackbarActions.sentMessageAction({ action: 'success', message: "customer added" }));
         dispatch(setOrderAction(order));
         dispatch(saveOrder(order));
     }
@@ -85,11 +95,15 @@ const deleteOrderItemAction = (orderItem) => {
 const paidOrder = () => {
     return (dispatch) => {
         const order = JSON.parse(localStorage.getItem('rappi'));
-        order.status = 'PAID';
-        dispatch(saveOrder(order));
-        localStorage.removeItem('rappi');
-        dispatch(setOrderAction({...orderDefault}));
-        dispatch(snackbarActions.sentMessageAction({action:'success', message: "Order paid"}));
+        if (!order.customer) {
+            dispatch(snackbarActions.sentMessageAction({ action: 'warning', message: "Select a customer" }));
+        } else {
+            order.status = 'PAID';
+            dispatch(saveOrder(order));
+            localStorage.removeItem('rappi');
+            dispatch(setOrderAction({ ...orderDefault }));
+            dispatch(snackbarActions.sentMessageAction({ action: 'success', message: "Order paid" }));
+        }
     }
 }
 
@@ -100,18 +114,19 @@ const saveOrder = (currentOrder) => {
         if (orders) {
             const orderExist = orders.find(order => order.id === currentOrder.id);
             orders = orderExist ? orders.map(order => order.id === currentOrder.id ? currentOrder : order)
-            : [...orders, currentOrder];
+                : [...orders, currentOrder];
             dispatch(setOrdersAction(orders));
         } else {
             dispatch(setOrdersAction([order]));
         }
     }
-    
+
 }
 
 export {
     selectCartOrderItemAction,
     addOrderItemAction,
     deleteOrderItemAction,
-    paidOrder
+    paidOrder,
+    addCustomerToOrder
 }

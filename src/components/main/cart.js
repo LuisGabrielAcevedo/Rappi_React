@@ -3,19 +3,24 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import ProductDialogComponent from './productDialog';
 import * as cartActions from '../../store/cart/actions';
+import * as appActions from '../../store/app/actions';
 import Icon from '@material-ui/core/Icon';
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
 import Button from '@material-ui/core/Button';
+import CustomerDialogComponent from './customerDialog';
+import IconButton from '@material-ui/core/IconButton';
+import Avatar from '@material-ui/core/Avatar';
+import PersonIcon from '@material-ui/icons/Person';
 
 class CartComponent extends Component {
 
-  state = {
-    open: true
-  }
-
   handleClose = value => {
     this.props.selectOrderItem(null);
+  };
+
+  handleCustomersClose = value => {
+    this.props.customerModal(false);
   };
 
   editOrderItem(orderItem) {
@@ -35,6 +40,7 @@ class CartComponent extends Component {
     const order = this.props.cart.order;
     const orderItemsReverse = [...order.orderItems].reverse();
     const open = orderItem ? true : false;
+    const customerModal = this.props.app.customerModalStatus;
 
 
     const orderItems = orderItemsReverse.length ?
@@ -52,18 +58,33 @@ class CartComponent extends Component {
           <Grid item xs={1} onClick={() => this.editOrderItem(orderItem)}><Icon color="primary"><EditIcon /></Icon></Grid>
           <Grid item xs={1} onClick={() => this.deleteOrderItem(orderItem)}><Icon style={{ color: '#d0021b' }}><CloseIcon /></Icon></Grid>
         </Grid>
-      )) : <img className="cart-image" src={require(`../../assets/EmptyCart.svg`)} alt={require(`../../assets/EmptyCart.svg`)}/>;
+      )) : <img className="cart-image" src={require(`../../assets/EmptyCart.svg`)} alt={require(`../../assets/EmptyCart.svg`)} />;
     return (
       <div className="cart-container">
         <Grid
           container
           direction="row"
-          justify="space-around"
+          justify="space-between"
           alignItems="center"
           className="cart-title"
+          style={{ padding: '0 10px' }}
         >
           <Grid item>Cart</Grid>
-
+          <Grid item>
+            {
+              order.customer ? <span>{`${order.customer.firstName} ${order.customer.lastName}`}</span> : <span>Select a customer</span>
+            }
+          </Grid>
+          <Grid item onClick={() => this.props.customerModal(true)}>
+            {
+              order.customer ? <Avatar
+                alt={order.customer.profileImage.url}
+                src={order.customer.profileImage.url}></Avatar>
+                : <IconButton style={{ color: 'white' }}>
+                  <PersonIcon />
+                </IconButton>
+            }
+          </Grid>
         </Grid>
         <div className="cart-content">
           {orderItems}
@@ -77,12 +98,15 @@ class CartComponent extends Component {
         </div>
         {
           order && order.status === 'PENDING' ? <Button variant="contained" className="cartbutton"
-          size="large" color="primary" onClick={() => this.payOrder()}>
-          pay
-        </Button>: null
+            size="large" color="primary" onClick={() => this.payOrder()}>
+            pay
+        </Button> : null
         }
         {
-          orderItem ? <ProductDialogComponent open={open} onClose={this.handleClose} orderItem={orderItem}/> : null
+          orderItem ? <ProductDialogComponent open={open} onClose={this.handleClose} orderItem={orderItem} /> : null
+        }
+        {
+          customerModal ? <CustomerDialogComponent open={customerModal} onClose={this.handleCustomersClose} /> : null
         }
       </div>
     );
@@ -91,7 +115,8 @@ class CartComponent extends Component {
 
 const mapStateToProps = state => {
   return {
-    cart: state.cart
+    cart: state.cart,
+    app: state.app
   }
 }
 
@@ -99,7 +124,8 @@ const mapDispatchToProps = dispatch => {
   return {
     selectOrderItem: (orderItem) => dispatch(cartActions.selectCartOrderItemAction(orderItem)),
     deleteOrderItem: (orderItem) => dispatch(cartActions.deleteOrderItemAction(orderItem)),
-    payOrder: () => dispatch(cartActions.paidOrder())
+    payOrder: () => dispatch(cartActions.paidOrder()),
+    customerModal: (status) => dispatch(appActions.setCustomerModalAction(status))
   }
 }
 

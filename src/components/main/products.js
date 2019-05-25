@@ -71,7 +71,7 @@ class ProductsComponent extends Component {
                         alignItems="center"
                         style={{ width: '100%', paddingLeft: '30px' }}
                     >
-                        <Grid item xs>
+                        <Grid item xs={12} md={4}>
                             <FormControlLabel control={
                                 <TextField
                                     label="Search"
@@ -107,7 +107,7 @@ class ProductsComponent extends Component {
                             }
                             ></FormControlLabel>
                         </Grid>
-                        <Grid item xs>
+                        <Grid item xs={12} md={4}>
                             <FormControlLabel control={
                                 <TextField
                                     select
@@ -137,7 +137,7 @@ class ProductsComponent extends Component {
                         alignItems="center"
                         style={{ width: '100%', paddingLeft: '30px' }}
                     >
-                        <Grid item xs>
+                        <Grid item xs={12} md={4}>
                             <FormControlLabel control={
                                 <TextField
                                     select
@@ -158,7 +158,7 @@ class ProductsComponent extends Component {
                             }
                             ></FormControlLabel>
                         </Grid>
-                        <Grid item xs>
+                        <Grid item xs={12} md={4}>
                             <FormControlLabel control={
                                 <TextField
                                     select
@@ -179,8 +179,8 @@ class ProductsComponent extends Component {
                             }
                             ></FormControlLabel>
                         </Grid>
-                        <Grid item xs>
-                            <Button variant="contained" onClick={() => this.clear()}>
+                        <Grid item xs={12} md={4}>
+                            <Button variant="contained" style={{margin: '10px'}} onClick={() => this.clear()}>
                                 Clear filters
                             </Button>
                         </Grid>
@@ -194,7 +194,7 @@ class ProductsComponent extends Component {
                             ? <CatogoriesListComponent
                                 categories={categories}
                                 sortBy={this.state.sortBy}
-                                loading={this.state.loading} />
+                                loading={this.state.loading}/>
                             : <p>No products available</p>
                 }
             </div>
