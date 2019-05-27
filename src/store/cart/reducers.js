@@ -3,7 +3,8 @@ const order = JSON.parse(localStorage.getItem('rappi'));
 const orders = JSON.parse(localStorage.getItem('rappi_orders'));
 const orderDefault = {
     _id: null,
-    orderItems: []
+    orderItems: [],
+    customer: null
 }
 
 const initialState = {

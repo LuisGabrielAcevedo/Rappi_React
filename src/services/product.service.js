@@ -9,8 +9,6 @@ class ProductService {
         search: ''
     }
 
-    
-
     getCategories() {
         return JSON.parse(JSON.stringify(Categories));
     }
@@ -110,7 +108,6 @@ class ProductService {
                             })
                         }
                     }
-
                 })
             })
         })

@@ -30,7 +30,7 @@ function AppBarComponent(props) {
           <MenuIcon/>
           </IconButton>
           <Typography variant="h6" color="inherit" className={classes.grow}>
-            {'El Baratón'}
+            {'El Baratón React'}
           </Typography>
         </Toolbar>
       </AppBar>
