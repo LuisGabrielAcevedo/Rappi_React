@@ -19,56 +19,58 @@ class OrdersComponent extends Component {
   render() {
     const orders = this.props.cart.orders;
     return (
-      <div>
-        <h2 className="title">Orders</h2>
-        <Grid
-          style={{ width: '100%' }}
-          container
-          direction="column"
-          justify="center"
-          alignItems="stretch"
-        >
-          <Grid item xs>
-            <Paper style={{ margin: window.innerWidth > 600 ? '50px' : '0px' }}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Id</TableCell>
-                    <TableCell>Client</TableCell>
-                    <TableCell>Status</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {orders.map(order => (
-                    <TableRow key={order.id}>
-                      <TableCell>{order.id}</TableCell>
-                      <TableCell>{order.customer 
-                        ? <span style={{color: '#3f51b5'}}>{order.customer.firstName} {order.customer.lastName}</span>: 'Without customer'}</TableCell>
-                      <TableCell>{order.status}</TableCell>
+      <div className="table-content">
+        <div className="table-scroll">
+          <h2 className="title">Orders</h2>
+          <Grid
+            style={{ width: '100%' }}
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+            <Grid>
+              <Paper>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Id</TableCell>
+                      <TableCell>Client</TableCell>
+                      <TableCell>Status</TableCell>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Paper>
+                  </TableHead>
+                  <TableBody>
+                    {orders.map(order => (
+                      <TableRow key={order.id}>
+                        <TableCell>{order.id}</TableCell>
+                        <TableCell>{order.customer
+                          ? <span style={{ color: '#3f51b5' }}>{order.customer.firstName} {order.customer.lastName}</span> : 'Without customer'}</TableCell>
+                        <TableCell>{order.status}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </Paper>
+            </Grid>
           </Grid>
-        </Grid>
-        {
-          !orders.length
-            ?
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-            >
-              <Grid item xs>
-                <Button variant="contained"
-                  size="large" color="primary" onClick={() => { this.goTo('/pos') }}>
-                  start a sale
+          {
+            !orders.length
+              ?
+              <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+              >
+                <Grid item xs>
+                  <Button variant="contained"
+                    size="large" color="primary" onClick={() => { this.goTo('/pos') }}>
+                    start a sale
                 </Button>
-              </Grid>
-            </Grid> : null
-        }
+                </Grid>
+              </Grid> : null
+          }
+        </div>
       </div>
     );
   }

@@ -59,7 +59,7 @@ class ProductDialogComponent extends Component {
                                 alignItems="center"
                                 className="product-dialog-content"
                             >
-                                <DialogTitle>{orderItem.product.name}</DialogTitle>
+                                <DialogTitle style={{padding:'5px'}}>{orderItem.product.name}</DialogTitle>
                                 <TextField
                                     id="outlined-name"
                                     label="Quantity"
